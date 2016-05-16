@@ -27,7 +27,7 @@ public enum ContentAlignment{
     case Left, Center, Right
 }
 
-public class SimplePDF{
+@objc public class SimplePDF: NSObject{
     
     /* States */
     private var commands: [SimplePDFCommand] = []
@@ -54,7 +54,7 @@ public class SimplePDF{
     }
     
     
-    /// - Important: Font and Content alignment settings will be ignored.
+    /// Important: Font and Content alignment settings will be ignored.
     /// You have to manually add those attributes to attributed text yourself.
     public func addAttributedText( attributedText: NSAttributedString ){
         commands += [ .AddAttributedText(attributedText) ]
