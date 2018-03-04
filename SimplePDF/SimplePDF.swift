@@ -117,11 +117,11 @@ public struct TableDefinition {
         commands += [ .addTable(rowCount: rowCount, columnCount: columnCount, rowHeight: rowHeight, columnWidth: columnWidth, tableLineWidth: tableLineWidth, font: font, tableDefinition: nil, dataArray: dataArray) ]
     }
     
-    @objc open func addTable(_ rowCount: Int, columnCount: Int, rowHeight: CGFloat, tableLineWidth: CGFloat, tableDefinition: TableDefinition, dataArray: Array<Array<String>>) {
+    open func addTable(_ rowCount: Int, columnCount: Int, rowHeight: CGFloat, tableLineWidth: CGFloat, tableDefinition: TableDefinition, dataArray: Array<Array<String>>) {
         commands += [ .addTable(rowCount: rowCount, columnCount: columnCount, rowHeight: rowHeight, columnWidth: nil, tableLineWidth: tableLineWidth, font: nil, tableDefinition: tableDefinition, dataArray: dataArray) ]
     }
     
-    @objc open func setContentAlignment(_ alignment: ContentAlignment) {
+    open func setContentAlignment(_ alignment: ContentAlignment) {
         commands += [ .setContentAlignment(alignment) ]
     }
     
@@ -558,3 +558,4 @@ public struct TableDefinition {
     }
     
 }
+
