@@ -59,7 +59,7 @@ public struct TableDefinition {
     fileprivate let pageMarginBottom: CGFloat
     fileprivate let pageMarginRight: CGFloat
     
-    public init(pageSize: CGSize, pageMargin: CGFloat = 20.0) {
+    @objc public init(pageSize: CGSize, pageMargin: CGFloat = 20.0) {
         pageBounds = CGRect(origin: CGPoint.zero, size: pageSize)
         self.pageMarginLeft = pageMargin
         self.pageMarginTop = pageMargin
@@ -67,7 +67,7 @@ public struct TableDefinition {
         self.pageMarginBottom = pageMargin
     }
     
-    public init(pageSize: CGSize, pageMarginLeft: CGFloat, pageMarginTop: CGFloat, pageMarginBottom: CGFloat, pageMarginRight: CGFloat) {
+    @objc public init(pageSize: CGSize, pageMarginLeft: CGFloat, pageMarginTop: CGFloat, pageMarginBottom: CGFloat, pageMarginRight: CGFloat) {
         pageBounds = CGRect(origin: CGPoint.zero, size: pageSize)
         self.pageMarginBottom = pageMarginBottom
         self.pageMarginRight = pageMarginRight
@@ -82,58 +82,58 @@ public struct TableDefinition {
     /// SimplePDF will begin a new page and draw remaining text.
     ///
     /// This process will be repeated untill there's no text left to draw.
-    open func addText(_ text: String, font:UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize), textColor:UIColor = UIColor.black) {
+    @objc open func addText(_ text: String, font:UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize), textColor:UIColor = UIColor.black) {
         commands += [ .addText(text: text, font: font, textColor: textColor) ]
     }
     
     
     /// - Important: Font and Content alignment settings will be ignored.
     /// You have to manually add those attributes to attributed text yourself.
-    open func addAttributedText( _ attributedText: NSAttributedString) {
+    @objc open func addAttributedText( _ attributedText: NSAttributedString) {
         commands += [ .addAttributedText(attributedText) ]
     }
     
-    open func addImage(_ image: UIImage) {
+    @objc open func addImage(_ image: UIImage) {
         commands += [ .addImage(image) ]
     }
     
-    open func addLineSpace(_ space: CGFloat) {
+    @objc open func addLineSpace(_ space: CGFloat) {
         commands += [ .addLineSpace(space) ]
     }
     
-    open func addVerticalSpace(_ space:CGFloat) {
+    @objc open func addVerticalSpace(_ space:CGFloat) {
         commands += [ .addLineSpace(space) ]
     }
     
-    open func addHorizontalSpace(_ space: CGFloat) {
+    @objc open func addHorizontalSpace(_ space: CGFloat) {
         commands += [ .addHorizontalSpace(space) ]
     }
     
-    open func addLineSeparator(height: CGFloat = 1.0) {
+    @objc open func addLineSeparator(height: CGFloat = 1.0) {
         commands += [ .addLineSeparator(height: height) ]
     }
     
-    open func addTable(_ rowCount: Int, columnCount: Int, rowHeight: CGFloat, columnWidth: CGFloat, tableLineWidth: CGFloat, font: UIFont, dataArray: Array<Array<String>>) {
+    @objc open func addTable(_ rowCount: Int, columnCount: Int, rowHeight: CGFloat, columnWidth: CGFloat, tableLineWidth: CGFloat, font: UIFont, dataArray: Array<Array<String>>) {
         commands += [ .addTable(rowCount: rowCount, columnCount: columnCount, rowHeight: rowHeight, columnWidth: columnWidth, tableLineWidth: tableLineWidth, font: font, tableDefinition: nil, dataArray: dataArray) ]
     }
     
-    open func addTable(_ rowCount: Int, columnCount: Int, rowHeight: CGFloat, tableLineWidth: CGFloat, tableDefinition: TableDefinition, dataArray: Array<Array<String>>) {
+    @objc open func addTable(_ rowCount: Int, columnCount: Int, rowHeight: CGFloat, tableLineWidth: CGFloat, tableDefinition: TableDefinition, dataArray: Array<Array<String>>) {
         commands += [ .addTable(rowCount: rowCount, columnCount: columnCount, rowHeight: rowHeight, columnWidth: nil, tableLineWidth: tableLineWidth, font: nil, tableDefinition: tableDefinition, dataArray: dataArray) ]
     }
     
-    open func setContentAlignment(_ alignment: ContentAlignment) {
+    @objc open func setContentAlignment(_ alignment: ContentAlignment) {
         commands += [ .setContentAlignment(alignment) ]
     }
     
-    open func beginNewPage() {
+    @objc open func beginNewPage() {
         commands += [ .beginNewPage ]
     }
     
-    open func beginHorizontalArrangement() {
+    @objc open func beginHorizontalArrangement() {
         commands += [ .beginHorizontalArrangement ]
     }
     
-    open func endHorizontalArrangement() {
+    @objc open func endHorizontalArrangement() {
         commands += [ .endHorizontalArrangement ]
     }
     
@@ -462,7 +462,7 @@ public struct TableDefinition {
         case vertical
     }
     
-    open func generatePDFdata() -> Data {
+    @objc open func generatePDFdata() -> Data {
         
         let pdfData = NSMutableData()
         
