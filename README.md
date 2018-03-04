@@ -5,7 +5,7 @@
 <p align="center">
    <img src="https://img.shields.io/badge/platform-iOS%208.0%2B-blue.svg?style=flat-square" alt="Platform: iOS 8.0+" />
     <a href="https://developer.apple.com/swift">
-        <img src="https://img.shields.io/badge/language-swift3-f48041.svg?style=flat-square" alt="Language: Swift 3" />
+        <img src="https://img.shields.io/badge/language-Swift%204-f48041.svg?style=flat-square" alt="Language: Swift 4" />
     </a>
     <img src="https://img.shields.io/cocoapods/v/SimplePDF.svg?style=flat-square" alt="Cocoapods" />
 </p>
@@ -27,6 +27,9 @@ let A4paperSize = CGSize(width: 595, height: 842)
 let pdf = SimplePDF(pageSize: A4paperSize)
 
 pdf.addText("Hello World!")
+// or
+// pdf.addText("Hello World!", font: myFont, textColor: myTextColor)
+
 pdf.addImage( anImage )
 
 let dataArray = [["Test1", "Test2"],["Test3", "Test4"]]
@@ -62,6 +65,8 @@ import SimplePDF
 ```swift
 let A4paperSize = CGSize(width: 595, height: 842)
 let pdf = SimplePDF(pageSize: A4paperSize, pageMargin: 20.0)
+// or define all margins extra
+let pdf = SimplePDF(pageSize: A4paperSize, pageMarginLeft: 35, pageMarginTop: 50, pageMarginBottom: 40, pageMarginRight: 35)
 ```
 
 ### Write Something
@@ -74,6 +79,43 @@ pdf.addLineSeparator(height: 30) // or pdf.addLineSeparator() default height is 
 pdf.addLineSpace(20)
 ```
 
+### Layout
+You can layout horizontally and vertically
+```swift
+// Start a horizonal arrangement
+pdf.beginHorizontalArrangement()
+// Add space from the left
+pdf.addHorizontalSpace(60)            
+
+// now add your text, table, image, ...
+
+// finishe the horizontal arrangement so you can continue vertically
+pdf.endHorizontalArrangement()
+
+// adds a vertical space
+pdf.addVerticalSpace(70)
+```
+
+### Table Definitions
+Define the layout of tables with definitions
+```swift
+let tableDef = TableDefinition(alignments: [.left, .left],
+                               columnWidths: [100, 300],
+                               fonts: [UIFont.systemFont(ofSize: 20),
+                                       UIFont.systemFont(ofSize: 16)],
+                               textColors: [UIColor.black,
+                                            UIColor.blue])
+         
+let data = [] // my data
+         
+pdf.addTable(data.count, 
+             columnCount: 2, 
+             rowHeight: 25, 
+             tableLineWidth: 0, // this is taken from the definition
+             tableDefinition: tableDef, 
+             dataArray: data)
+```
+
 ### Utilities
 
 ```swift
@@ -84,8 +126,6 @@ These following commands will affect everything you write after you call.
 
 ```swift
 pdf.setContentAlignment(.Center) // .Left, .Center, .Right
-
-pdf.setFont( UIFont ) // only affect pdf.addText(...) command
 ```
 
 ### Generate PDF data
